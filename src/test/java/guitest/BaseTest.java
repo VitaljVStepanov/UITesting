@@ -6,8 +6,16 @@ import io.github.bonigarcia.wdm.WebDriverManager;
         import org.openqa.selenium.WebDriver;
         import org.openqa.selenium.chrome.ChromeDriver;
 
-public class GoogleSearchString {
-    private WebDriver driver;
+public class BaseTest {
+    protected WebDriver driver;
+    protected SearchString searchString;
+    protected RefClick refClick;
+    protected String url;
+
+
+    public BaseTest(String url) {
+        this.url = url;
+    }
 
     @BeforeAll
     public static void checkBrowserShim() {
@@ -18,7 +26,7 @@ public class GoogleSearchString {
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("https://google.com");
+        driver.get(url);
     }
 
     @AfterEach
@@ -29,9 +37,7 @@ public class GoogleSearchString {
     }
 
     @Test
-    public void simpleTest() {
-        String xpath = "//input[@title='Поиск']";
-        SearchString searchString = new SearchString(driver,xpath);
-        searchString.doSearch("Сбербанк");
+    public void doTest() {
+
     }
 }
